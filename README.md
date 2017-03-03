@@ -3,7 +3,7 @@
 This is an early version of the Replicated Developer Studio, designed to allow a developer to run a local API and quickly iterate while building a Replicated application.
 
 ## What it does do
-The Replicated Developer Studio can provide YAML releases to Replicated for install and updates. This is designed to streamline the development cycle to allow for local yaml changes and testing new versions of your images.
+The Replicated Developer Studio can provide YAML releases to Replicated for install and updates. This is designed to streamline the development cycle to allow for local yaml changes and testing new versions of the application.
 
 ## What it doesn't do
 1. Licenses to install must still be valid. This service only handles a few endpoints in the Replicated API, and proxies all of the others to the primary API service. 
