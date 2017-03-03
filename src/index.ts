@@ -8,6 +8,7 @@ import * as chalk from "chalk";
 import * as _ from "lodash";
 import * as util from "util";
 import * as fs from "fs";
+import * as path from "path";
 import * as process from "process";
 
 import routes from "./routes";
@@ -107,7 +108,7 @@ function buildRoutes() {
     } else if (route.method === "proxy") {
       app.use(route.path, proxy(consts.upstreamEndpoint, {
         forwardPath: (req, res) => {
-          return `${req.originalUrl}`;
+          return path.join(require("url").parse(consts.upstreamEndpoint).path, req.originalUrl);
         },
       }));
     } else {
