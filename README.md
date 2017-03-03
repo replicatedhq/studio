@@ -13,7 +13,7 @@ The Replicated Developer Studio can provide YAML releases to Replicated for inst
 ## Configure Replicated to use this local API
 - Start with a new installation of Replicated, or remove any previously install application.
 - Configure Replicated by adding a `MARKET_BASE_URL` variable that points to the location of this Developer Studio service:
-    - systemd:  add the variable to `/lib/systemd/system/replicated.service` ([see example](https://github.com/replicatedhq/studio/blob/master/config/systemd.md))
+    - systemd:  add the variable to `/etc/default/replicated` ([see example](https://github.com/replicatedhq/studio/blob/master/config/systemd.md))
     - upstart: add the variable to `/etc/init/replicated`
 
 
