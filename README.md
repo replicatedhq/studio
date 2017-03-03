@@ -3,7 +3,7 @@
 This is an early version of the Replicated Developer Studio, designed to allow a developer to run a local API and quickly iterate while building a Replicated application.
 
 ## What it does do
-The Replicated Developer Studio can provide YAML releases to Replicated for install and updates. This is designed to be used during the developer cycle to avoid the iterative loop of pasting YAML into vendor.replicated.com, promoting the release and installing. 
+The Replicated Developer Studio can provide YAML releases to Replicated for install and updates. This is designed to streamline the development cycle to allow for local yaml changes and testing new versions of the application.
 
 ## What it doesn't do
 1. Licenses to install must still be valid. This service only handles a few endpoints in the Replicated API, and proxies all of the others to the primary API service. 
@@ -16,16 +16,17 @@ The Replicated Developer Studio can provide YAML releases to Replicated for inst
 - Configure Replicated by adding a `MARKET_BASE_URL` variable that points to the location of this Developer Studio service:
     - systemd:  add the variable to `/etc/default/replicated` ([see example](https://github.com/replicatedhq/studio/blob/master/config/systemd.md))
     - upstart: add the variable to `/etc/init/replicated`
+- Restart Replicated
 
 
 ## Getting Started
-To start the Developer Studio listening on localhost:8006, just clone this repo, install nodejs and [yarn](https://yarnpkg.com), and then run the following commands:
+To start the Developer Studio, clone this repo, install nodejs and [yarn](https://yarnpkg.com), and then run the following commands:
 ```bash
 yarn
 make build run
 ```
 
-This API assumes you have a directory named `/replicated` that is readable by the user running the API. It will look in this directory for files named <sequence>.yaml and serve these as releases. It's important that you start with the sequence number that is currently served by Replicated for the channel your license is in.
+This API assumes you have a directory named `/replicated` that is readable by the user running the API. It will look in this directory for files named <sequence>.yaml and serve these as releases. It's important that you start with the sequence number that is the latest promoted version for the channel your license is in.
 
 For example, here's a screenshot from a test app on Replicated.
 ![Replicated](https://github.com/replicatedhq/studio/blob/master/images/vendor-web.png). 
