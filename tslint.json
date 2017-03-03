@@ -1,0 +1,18 @@
+{
+  "extends": "tslint:recommended",
+  "jsRules": {
+    "no-console": [false],
+    "object-literal-sort-keys": false,
+    "max-line-length": [false]
+  },
+  "rules": {
+    "ordered-imports": [false],
+    "no-console": [false],
+    "interface-name": [false],
+    "object-literal-sort-keys": false,
+    "max-line-length": [false],
+    "member-ordering": [false],
+    "arrow-parens": false,
+    "no-string-literal": false
+  }
+}

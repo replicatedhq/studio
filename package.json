@@ -1,0 +1,29 @@
+{
+  "name": "replicated-local",
+  "version": "0.0.1",
+  "description": "A tool to enable easier iteration on Replicated projects",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/replicatedhq/replicated-local.git"
+  },
+  "author": "Replicated",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^7.0.5",
+    "body-parser": "^1.17.0",
+    "chalk": "^1.1.3",
+    "cors": "^2.8.1",
+    "express": "^4.15.0",
+    "express-http-proxy": "^0.11.0",
+    "js-yaml": "^3.8.2",
+    "lodash": "^4.17.4",
+    "source-map-support": "^0.4.11",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.1",
+    "uuid": "^3.0.1"
+  }
+}
