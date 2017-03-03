@@ -20,7 +20,7 @@ The Replicated Developer Studio can provide YAML releases to Replicated for inst
 
 
 ## Getting Started
-To start the Developer Studio just clone this repo, install nodejs and [yarn](https://yarnpkg.com), and then run the following commands:
+To start the Developer Studio, clone this repo, install nodejs and [yarn](https://yarnpkg.com), and then run the following commands:
 ```bash
 yarn
 make build run
