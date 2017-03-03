@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import * as chalk from "chalk";
 
 import consts from "../consts";
 import { allowMultiDocumentResponse } from "../replicated/helpers";
@@ -19,6 +20,7 @@ export default async function (req) {
   }
 
   if (!releaseFilename) {
+    chalk.red(`Replicated requested release sequence ${req.params.sequence}, but this realease yaml was not found in ${consts.localPath}`);
     throw { status: 500, err: new Error("Release not found") };
   }
 

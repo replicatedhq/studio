@@ -1,6 +1,7 @@
 import getAppDefaultRelease from "./handlers/getAppDefaultRelease";
 import getAppOneRelease from "./handlers/getAppOneRelease";
 import getAppUpgrades from "./handlers/getAppUpgrades";
+import getAppMetadata from "./handlers/getAppMetadata";
 
 export default {
   //
@@ -20,6 +21,11 @@ export default {
     path: "/v1/app/:appId/upgrades",
     method: "post",
     handler: getAppUpgrades,
+  },
+  getAppMetadata: {
+    path: "/app/:appId/:sequence/metadata",
+    method: "get",
+    handler: getAppMetadata,
   },
 
   //
