@@ -9,5 +9,12 @@ build: prebuild
 	./node_modules/.bin/tslint --project ./tsconfig.json
 	./node_modules/.bin/tsc
 
-run:
-	node --no-deprecation ./build/index.js
+clean:
+	rm -rf build
+
+help:
+	node --no-deprecation ./bin/studio help
+
+server:
+	node --no-deprecation ./bin/studio server
+

@@ -24,6 +24,8 @@
     "source-map-support": "^0.4.11",
     "tslint": "^4.5.1",
     "typescript": "^2.2.1",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "yargs": "^7.0.2",
+    "popsicle": "^9.1.0"
   }
 }

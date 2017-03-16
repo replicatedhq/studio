@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+"use strict";
+require("source-map-support/register");
+const yargs = require("yargs");
+yargs
+    .commandDir("../build")
+    .env()
+    .help()
+    .argv;
+//# sourceMappingURL=runner.js.map
