@@ -23,14 +23,28 @@ The Replicated Developer Studio can provide YAML releases to Replicated for inst
 
 ## Getting Started
 To start the Developer Studio, clone this repo, install nodejs and [yarn](https://yarnpkg.com), and then run the following commands:
+
 ```bash
 yarn
-make build run
+make build
 ```
 
-This API assumes you have a directory named `/replicated` that is readable by the user running the API. It will look in this directory for files named <sequence>.yaml and serve these as releases. It's important that you start with the sequence number that is the latest promoted version for the channel your license is in.
+Create your starting app yaml
+```bash
+bin/studio import --apikey <your-api-key> --app "<your-app-name>" --channel "<your-channel>"
+```
+
+Optionally provide a release sequence with `--release <your-release-sequence>`.
+
+Then run 
+
+```bash
+bin/studio server
+```
+
+This API assumes you have a directory named `/replicated` that is readable by the user running the API. It will look in this directory for files named <sequence>.yaml and serve these as releases. Your starting app-yaml must be the sequence with the highest promoted release.
 
 For example, here's a screenshot from a test app on Replicated.
 ![Replicated](https://github.com/replicatedhq/studio/blob/master/images/vendor-web.png). 
 
-My license is in the unstable channel. To start with the Studio environment, I should create a file named `/replicated/16.yaml` locally, and put my application yaml in it. Once installed, I can create a new release simply by creating a file named `/replicated/<any int higher than 16>.yaml` and clicking the Check For Updates button in Replicated. After the initial installation, Replicated will not use the real API for any sequence numbers and it's ok to generate as many as you want locally.
+My license is in the unstable channel. Once installed, I can create a new release simply by creating a file named `/replicated/<any int higher than prev release>.yaml` and clicking the Check For Updates button in Replicated. After the initial installation, Replicated will not use the real API for any sequence numbers and it's ok to generate as many as you want locally.
