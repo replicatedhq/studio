@@ -7,7 +7,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "strictNullChecks": true,
-        "outDir": "build",
+        "outDir": "dist",
         "pretty": true,
         "noImplicitAny": false,
         "allowJs": true        
