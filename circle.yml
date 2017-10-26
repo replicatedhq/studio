@@ -19,5 +19,5 @@ deployment:
     branch: master
     owner: replicatedhq
     commands:
-      - echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | yarn login
+      - echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
       - yarn run publish-if-version-changed
