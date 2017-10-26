@@ -10,10 +10,6 @@ dependencies:
   override:
     - yarn
 
-test:
-  override:
-    - exit 0
-
 deployment:
   npm:
     branch: master
