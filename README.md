@@ -49,7 +49,7 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
    curl -sSL https://get.replicated.com/docker | sudo bash
    ```
 
-   *\* [Installing via the easy-install script](/docs/distributing-an-application/installing-via-script/#basic-install)*
+   *\* [Installing via the easy-install script](https://help.replicated.com/docs/distributing-an-application/installing-via-script/#basic-install)*
 
 1. Configure Replicated by adding a `MARKET_BASE_URL` environment variable that points to the location of the Studio service. The Replicated configuration file is located at either `/etc/default/replicated` or `/etc/sysconfig/replicated` for Debian or RHEL based distributions respectively.
 
@@ -74,7 +74,7 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
    sudo systemctl restart replicated
    ```
    
-   *\* [Restarting Replicated](/docs/distributing-an-application/installing-via-script/#restarting-replicated)*
+   *\* [Restarting Replicated](https://help.replicated.com/docs/distributing-an-application/installing-via-script/#restarting-replicated)*
 
 1. Navigate to the on-premise admin console at https://<YOUR SERVER ADDRESS>:8080 in the browser and upload your license.
 
