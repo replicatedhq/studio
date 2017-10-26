@@ -1,0 +1,23 @@
+machine:
+  pre:
+    - mkdir ~/.yarn-cache
+  node:
+    version: 7.8.0
+
+dependencies:
+  pre:
+    - npm i -g yarn
+  override:
+    - yarn
+
+test:
+  override:
+    - exit 0
+
+deployment:
+  npm:
+    branch: master
+    owner: replicatedhq
+    commands:
+      - echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
+      - npm run publish-if-version-changed
