@@ -14,16 +14,20 @@ import * as process from "process";
 import routes from "./routes";
 import consts from "./consts";
 
-const app = express();
-app.use(bodyParser.json());
+function watch() {
+  if (!fs.existsSync(consts.localPath)) {
+    console.log(chalk.red(`Please create your application yaml at ${consts.localPath} before continuing.`));
+    process.exit(1);
+  }
+  console.log(chalk.green(`Watching "${consts.localPath}" for changes. Any updates to this file will be sent as an application update.`));
+}
 
-app.use(cors());
+function serve() {
+  const app = express();
+  app.use(bodyParser.json());
 
-buildRoutes();
-watch();
-serve();
+  app.use(cors());
 
-function buildRoutes() {
   // Add a healthcheck endpoint
   app.get("/healthz", (req, res) => {
     res.send("");
@@ -121,18 +125,13 @@ function buildRoutes() {
     console.log(chalk.red(`[${req.ip}] ${errMsg}`));
     res.status(404).send(errMsg);
   });
-}
 
-function watch() {
-  if (!fs.existsSync(consts.localPath)) {
-    console.log(chalk.red(`Please create your application yaml at ${consts.localPath} before continuing.`));
-    process.exit(1);
-  }
-  console.log(chalk.green(`Watching "${consts.localPath}" for changes. Any updates to this file will be sent as an application update.`));
-}
-
-function serve() {
   app.listen(8006, "0.0.0.0", () => {
     console.log("Replicated Studio listening on port 8006...");
   });
 }
+
+exports.start = () => {
+  watch();
+  serve();
+};

@@ -21,25 +21,23 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
    git clone https://github.com/replicatedhq/studio.git
    cd studio
    ```
-   
+
    *\* Note that `git` must be installed*
 
-1. Create a directory `/replicated` in the root directory of your server
+1. Create a directory `./replicated` in your home directory
 
    ```bash
-   mkdir -p /replicated
+   mkdir -p ./replicated
    ```
 
 1. Build and run the Studio project
 
    ```bash
    yarn
-   make build run
+   ./bin/replicated-studio
    ```
-   
-   *\* Note that `make` must be installed*
 
-   Studio assumes you have a directory named `/replicated` that is readable by the user running the service. It will look in this directory for files with extension `.yaml` and serve these as releases. It's important that you start with the sequence number that is the latest promoted version for the channel your license is in.
+   Studio will look in the directory `./replicated` for files with extension `.yaml` and serve these as releases. It's important that you start with the sequence number that is the latest promoted version for the channel your license is in.
 
 ## Configuring Replicated to use the local Studio API
 
