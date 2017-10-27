@@ -79,6 +79,6 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
 ## Example
 
 For example, here's a screenshot from a test app on Replicated.
-![Replicated](https://github.com/replicatedhq/studio/blob/master/images/vendor-web.png). 
+![Replicated](doc/images/vendor-web.png).
 
 My license is in the unstable channel. To start with the Studio environment, I should create a file named `/replicated/16.yaml` locally, and put my application yaml in it. Once installed, I can create a new release simply by creating a file named `/replicated/<any int higher than 16>.yaml` and clicking the Check For Updates button in Replicated. After the initial installation, Replicated will not use the real API for any sequence numbers and it's ok to generate as many as you want locally.

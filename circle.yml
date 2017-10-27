@@ -2,11 +2,12 @@ machine:
   pre:
     - mkdir ~/.cache/yarn
   node:
-    version: 7.8.0
+    version: 8
 
 dependencies:
   override:
     - yarn
+    - docker build -t replicatedhq/replicated-studio:$(node -e "console.log(require('./package.json').version);") .
   cache_directories:
     - ~/.cache/yarn
 
@@ -21,3 +22,5 @@ deployment:
     commands:
       - echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
       - yarn run publish-if-version-changed
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push replicatedhq/replicated-studio:$(node -e "console.log(require('./package.json').version);")

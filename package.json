@@ -2,7 +2,7 @@
   "name": "replicated-studio",
   "author": "Replicated, Inc.",
   "version": "0.1.0",
-  "license": "Apache",
+  "license": "Apache-2.0",
   "repository": "https://github.com/replicatedhq/replicated-studio.git",
   "description": "A tool to enable easier iteration on Replicated projects",
   "main": "dist/index.js",
