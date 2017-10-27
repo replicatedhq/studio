@@ -3,6 +3,8 @@ machine:
     - mkdir ~/.cache/yarn
   node:
     version: 8
+  services:
+    - docker
 
 dependencies:
   override:
