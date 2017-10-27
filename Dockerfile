@@ -2,6 +2,7 @@ FROM node:8
 
 RUN npm i -g yarn
 
+RUN mkdir -p /home/app
 WORKDIR /home/app
 
 ADD yarn.lock .

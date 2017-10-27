@@ -9,7 +9,7 @@ machine:
 dependencies:
   override:
     - yarn
-    - docker build -t --rm=false replicatedhq/replicated-studio:$(node -e "console.log(require('./package.json').version);") .
+    - docker build --rm=false -t replicatedhq/replicated-studio:$(node -e "console.log(require('./package.json').version);") .
   cache_directories:
     - ~/.cache/yarn
 
