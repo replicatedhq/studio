@@ -25,7 +25,7 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
    docker run --rm -it \
      -v `pwd`/replicated:/home/app/replicated \
      -p 8006:8006 \
-     replicatedhq/replicated-studio:latest
+     replicated/studio:latest
    ```
 
    Studio will look in the directory `./replicated` for files with extension `.yaml` and serve these as releases. It's important that you start with the sequence number that is the latest promoted version for the channel your license is in.
