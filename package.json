@@ -1,7 +1,7 @@
 {
   "name": "replicated-studio",
   "author": "Replicated, Inc.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "Apache-2.0",
   "repository": "https://github.com/replicatedhq/replicated-studio.git",
   "description": "A tool to enable easier iteration on Replicated projects",
@@ -17,9 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "publish-if-version-changed": "publish"
   },
-  "bin": {
-    "replicated-studio": "./dist/index.js"
-  },
+  "bin": "bin/replicated-studio",
   "devDependencies": {
     "@types/node": "^7.0.5",
     "publish": "^0.6.0",
