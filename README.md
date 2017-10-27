@@ -13,28 +13,19 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
 
 ## Getting started
 
-1. Install [Node.js](https://nodejs.org/en/download/package-manager/) and [yarn](https://yarnpkg.com/lang/en/docs/install/)
-
-1. Clone the [replicatedhq/studio](https://github.com/replicatedhq/studio) project
-
-   ```bash
-   git clone https://github.com/replicatedhq/studio.git
-   cd studio
-   ```
-
-   *\* Note that `git` must be installed*
-
-1. Create a directory `./replicated` in your home directory
+1. Create a directory `./replicated` in your current directory
 
    ```bash
    mkdir -p ./replicated
    ```
 
-1. Build and run the Studio project
+1. Run the Studio Docker container
 
    ```bash
-   yarn
-   ./bin/replicated-studio
+   docker run --rm -it \
+     -v `pwd`/replicated:/home/app/replicated \
+     -p 8006:8006 \
+     replicatedhq/replicated-studio:latest
    ```
 
    Studio will look in the directory `./replicated` for files with extension `.yaml` and serve these as releases. It's important that you start with the sequence number that is the latest promoted version for the channel your license is in.
@@ -52,26 +43,26 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
 1. Configure Replicated by adding a `MARKET_BASE_URL` environment variable that points to the location of the Studio service. The Replicated configuration file is located at either `/etc/default/replicated` or `/etc/sysconfig/replicated` for Debian or RHEL based distributions respectively.
 
    **Example configuration file:**
-   ```
+   ```bash
    RELEASE_CHANNEL=stable
    PRIVATE_ADDRESS=<snip>
    SKIP_OPERATOR_INSTALL=0
    REPLICATED_OPTS=" -e DAEMON_TOKEN=<snip> -e LOG_LEVEL=info -e NODENAME=<snip> -e MARKET_BASE_URL=http://$PRIVATE_ADDRESS:8006"
    REPLICATED_UI_OPTS=""
    ```
-   
+
 1. Restart Replicated
 
    **Ubuntu/Debian**
    ```bash
    sudo service replicated restart
    ```
-   
+
    **CentOS/RHEL/Fedora**
    ```bash
    sudo systemctl restart replicated
    ```
-   
+
    *\* [Restarting Replicated](https://help.replicated.com/docs/distributing-an-application/installing-via-script/#restarting-replicated)*
 
 1. Navigate to the on-premise admin console at https://<YOUR SERVER ADDRESS>:8080 in the browser and upload your license.
@@ -79,6 +70,20 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
 ## Example
 
 For example, here's a screenshot from a test app on Replicated.
-![Replicated](https://github.com/replicatedhq/studio/blob/master/images/vendor-web.png). 
+![Replicated](doc/images/vendor-web.png).
 
 My license is in the unstable channel. To start with the Studio environment, I should create a file named `/replicated/16.yaml` locally, and put my application yaml in it. Once installed, I can create a new release simply by creating a file named `/replicated/<any int higher than 16>.yaml` and clicking the Check For Updates button in Replicated. After the initial installation, Replicated will not use the real API for any sequence numbers and it's ok to generate as many as you want locally.
+
+## Contributing
+
+### Building the project
+
+   ```bash
+   yarn
+   ```
+
+### Running the project
+
+   ```bash
+   ./bin/replicated-studio
+   ```

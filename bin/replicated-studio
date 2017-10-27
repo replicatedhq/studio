@@ -2,4 +2,8 @@
 "use strict";
 const studio = require("../dist/index");
 
+process.on('SIGINT', function () {
+  process.exit(1);
+});
+
 studio.start();
