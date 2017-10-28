@@ -14,6 +14,16 @@ import * as process from "process";
 import routes from "./routes";
 import consts from "./consts";
 
+// TODO yargs
+function validate() {
+  let validThresholds = ["info", "warn", "error", "off"];
+  let thesholdInvalid = _.indexOf(validThresholds, consts.lintThreshold) === -1;
+  if (thesholdInvalid) {
+    console.log(chalk.red(`unknown lint threshold ${consts.lintThreshold}. Choices are ${validThresholds.join(", ")}`));
+    process.exit(1);
+  }
+}
+
 function watch() {
   if (!fs.existsSync(consts.localPath)) {
     console.log(chalk.red(`Please create your application yaml at ${consts.localPath} before continuing.`));
@@ -132,6 +142,7 @@ function serve() {
 }
 
 exports.start = () => {
+  validate();
   watch();
   serve();
 };

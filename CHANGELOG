@@ -1,0 +1,4 @@
+0.3.0 /2017-11-01
+  * Add [replicated-lint](https://github.com/replicatedhq/replicated-lint) to release loading, invalid yaml will not be exposed as a release.
+  * Allow specifying the target YAML directory and upstream url via `STUDIO_YAML_DIR` and `STUDIO_UPSTREAM_BASE_URL`
+  * Fix a bug where a YAML document with no `components` section would cause a 500 error
