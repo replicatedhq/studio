@@ -41,17 +41,18 @@ export function fillOutYaml(filename) {
   const doc = yaml.safeLoad(fs.readFileSync(filename, "utf8"));
 
   // Some fields are added by the real api and we need to simulate that here
-
-  doc.components.forEach((component) => {
-    component.containers.forEach((container) => {
-      if (!container.logs) {
-        container.logs = {
-          max_size: "",
-          max_files: "",
-        };
-      }
+  if (doc.commponents) {
+    doc.components.forEach((component) => {
+      component.containers.forEach((container) => {
+        if (!container.logs) {
+          container.logs = {
+            max_size: "",
+            max_files: "",
+          };
+        }
+      });
     });
-  });
+  }
 
   return yaml.safeDump(doc);
 }

@@ -23,7 +23,7 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
 
    ```bash
    docker run --rm -it \
-     -v `pwd`/replicated:/home/app/replicated \
+     -v `pwd`/replicated:/replicated \
      -p 8006:8006 \
      replicated/studio:latest
    ```
@@ -40,14 +40,14 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
 
    *\* [Installing via the easy-install script](https://help.replicated.com/docs/distributing-an-application/installing-via-script/#basic-install)*
 
-1. Configure Replicated by adding a `MARKET_BASE_URL` environment variable that points to the location of the Studio service. The Replicated configuration file is located at either `/etc/default/replicated` or `/etc/sysconfig/replicated` for Debian or RHEL based distributions respectively.
+1. Configure Replicated by adding a `MARKET_BASE_URL` environment variable that points to the location of the Studio service. The Replicated configuration file is located at either `/etc/default/replicated` or `/etc/sysconfig/replicated` for Debian or RHEL based distributions respectively. In this example, we assume `replicated` and `replicated-studio` are running on the same host so we use the docker0 ip `172.17.0.1`. If studio is running on a separate server, use the address of that server instead.
 
    **Example configuration file:**
    ```bash
    RELEASE_CHANNEL=stable
    PRIVATE_ADDRESS=<snip>
    SKIP_OPERATOR_INSTALL=0
-   REPLICATED_OPTS=" -e DAEMON_TOKEN=<snip> -e LOG_LEVEL=info -e NODENAME=<snip> -e MARKET_BASE_URL=http://$PRIVATE_ADDRESS:8006"
+   REPLICATED_OPTS=" -e DAEMON_TOKEN=<snip> -e LOG_LEVEL=info -e NODENAME=<snip> -e MARKET_BASE_URL=http://172.17.0.1:8006"
    REPLICATED_UI_OPTS=""
    ```
 

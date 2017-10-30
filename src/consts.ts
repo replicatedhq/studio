@@ -1,6 +1,6 @@
 
 export default {
-  localPath: "./replicated",
-  // upstreamEndpoint: "http://192.168.100.100:8006/market",
-  upstreamEndpoint: "https://api.replicated.com/market/",
+  localPath: process.env.STUDIO_YAML_DIR || "./replicated",
+  upstreamEndpoint: process.env.STUDIO_UPSTREAM_BASE_URL || "https://api.replicated.com/market/",
+  lintThreshold: process.env.STUDIO_LINT_THRESHOLD || "error",
 };
