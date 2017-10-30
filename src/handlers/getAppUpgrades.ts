@@ -39,10 +39,12 @@ export default async function (req) {
       return;
     }
 
+    const ruleSet =  linter.rules.all.filter(ruleNotifiesAt(consts.lintThreshold));
+
     const linterErrors = linter.lint(
       yamlContents,
       {
-        rules: linter.rules.all.filter(ruleNotifiesAt(consts.lintThreshold)),
+        rules: ruleSet,
         schema: linter.schemas.parsed,
       },
     );
@@ -52,7 +54,7 @@ export default async function (req) {
       console.log(chalk.yellow(`${linterErrors.length} errors in ${releasePath}:`));
       linter.cmdutil.reporters.consoleReporter(
         yamlContents,
-        linter.rules.all,
+        ruleSet,
         linterErrors,
       );
       failedPaths.push(releasePath);
