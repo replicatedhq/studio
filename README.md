@@ -65,7 +65,7 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
 
    *\* [Restarting Replicated](https://help.replicated.com/docs/distributing-an-application/installing-via-script/#restarting-replicated)*
 
-1. Navigate to the on-premise admin console at https://<YOUR SERVER ADDRESS>:8080 in the browser and upload your license.
+1. Navigate to the on-premise admin console at https://<YOUR SERVER ADDRESS>:8800 in the browser and upload your license.
 
 ## Example
 
