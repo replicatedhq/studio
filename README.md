@@ -28,7 +28,7 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
      replicated/studio:latest
    ```
 
-   Studio will look in the directory `./replicated` for files with extension `.yaml` and serve these as releases. It's important that you start with the sequence number that is the latest promoted version for the channel your license is in.
+   Studio will look in the directory `./replicated` for files with extension `.yaml` and serve these as releases. It's important that you start with the sequence number that is the latest promoted version for the channel your license is in. 
 
 ## Configuring Replicated to use the local Studio API
 
@@ -65,14 +65,11 @@ The [Replicated Developer Studio](https://github.com/replicatedhq/studio) can pr
 
    *\* [Restarting Replicated](https://help.replicated.com/docs/distributing-an-application/installing-via-script/#restarting-replicated)*
 
-1. Navigate to the on-premise admin console at https://\<YOUR SERVER ADDRESS\>:8800 in the browser and upload your license.
+1. Navigate to the on-premise admin console at `https://<YOUR SERVER ADDRESS>:8800` in the browser and upload your license.
 
-## Example
+## Iterating on your YAML
 
-For example, here's a screenshot from a test app on Replicated.
-![Replicated](doc/images/vendor-web.png).
-
-My license is in the unstable channel. To start with the Studio environment, I should create a file named `/replicated/16.yaml` locally, and put my application yaml in it. Once installed, I can create a new release simply by creating a file named `/replicated/<any int higher than 16>.yaml` and clicking the Check For Updates button in Replicated. After the initial installation, Replicated will not use the real API for any sequence numbers and it's ok to generate as many as you want locally.
+Once Studio is installed a new release can be installed by simply creating a file `./replicated/<any int higher than current sequence>.yaml` and clicking the "Check Now" button in the Updates tile on the Replicated dashboard of the Admin Console. After the initial installation, Replicated will no longer use the remote API for any sequence numbers, so it is ok to generate as many releases as you need locally.
 
 ## Contributing
 
