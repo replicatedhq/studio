@@ -16,7 +16,7 @@ export default async function (req) {
   if (fs.existsSync(path.join(consts.localPath, `${req.params.sequence}.yaml`))) {
     releaseFilename = path.join(consts.localPath, `${req.params.sequence}.yaml`);
   } else if (fs.existsSync(path.join(consts.localPath, `${req.params.sequence}.yml`))) {
-    releaseFilename = path.join(consts.localPath, `${req.params.sequence}.yaml`);
+    releaseFilename = path.join(consts.localPath, `${req.params.sequence}.yml`);
   }
 
   if (!releaseFilename) {
