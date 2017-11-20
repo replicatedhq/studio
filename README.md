@@ -26,7 +26,7 @@ Development on your Replicated YAML can be done locally, providing a quick way t
 1. Install and run the Studio Docker container
 
    ```bash
-   docker run --rm -it \
+   docker run --name studio --rm -d \
      -v `pwd`/replicated:/replicated \
      -p 8006:8006 \
      replicated/studio:latest
@@ -39,7 +39,7 @@ Development on your Replicated YAML can be done locally, providing a quick way t
    RELEASE_CHANNEL=stable
    PRIVATE_ADDRESS=<snip>
    SKIP_OPERATOR_INSTALL=0
-   REPLICATED_OPTS=" -e DAEMON_TOKEN=<snip> -e LOG_LEVEL=info -e NODENAME=<snip> -e MARKET_BASE_URL=http://172.17.0.1:8006"
+   REPLICATED_OPTS=" -e MARKET_BASE_URL=http://172.17.0.1:8006 -e DAEMON_TOKEN=<snip> -e LOG_LEVEL=info -e NODENAME=<snip>"
    REPLICATED_UI_OPTS=""
    ```
 
@@ -56,6 +56,11 @@ Development on your Replicated YAML can be done locally, providing a quick way t
    ```
 
    *\* [Restarting Replicated](https://help.replicated.com/docs/distributing-an-application/installing-via-script/#restarting-replicated)*
+
+1. Tail the logs from Replicated Studio. This will show any issues with your `replicated.yml` changes, and all interactions Replicated has with the Studio API.
+   ```bash
+   docker logs -f studio
+   ```
 
 1. Navigate to the on-premise admin console at `https://<YOUR SERVER ADDRESS>:8800` in the browser and upload your license.
 
