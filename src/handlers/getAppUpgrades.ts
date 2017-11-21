@@ -58,7 +58,9 @@ export default async function (req) {
         linterErrors,
       );
       failedPaths.push(releasePath);
-      return;
+      if (consts.lintRequired) {
+        return;
+      }
     }
 
     versions.push(releaseDetails(release, yamlContents, lastModifiedTime));
@@ -66,7 +68,11 @@ export default async function (req) {
 
   if (!_.isEmpty(failedPaths)) {
     console.log();
-    console.log(chalk.yellow("One or more releases were not included in the release list because they failed linting."));
+    if (consts.lintRequired) {
+      console.log(chalk.yellow("One or more releases were not included in the release list because they failed linting."));
+    } else {
+      console.log(chalk.yellow("One or more releases has failed linting."));
+    }
     console.log(chalk.yellow("Please correct the errors in"));
     console.log(chalk.yellow("  * " + failedPaths.join("\n  * ")));
   }
