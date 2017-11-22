@@ -21,7 +21,7 @@ deployment:
     branch: master
     owner: replicatedhq
     commands:
-      - echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
+      - npm run login-cli
       - npm run publish-if-version-changed
       - docker build --rm=false -t replicated/studio:$(node -pe "require('./package.json').version;") .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
