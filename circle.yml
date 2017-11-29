@@ -1,4 +1,6 @@
 machine:
+  environment:
+    MOCHA_FILE: "$CIRCLE_TEST_REPORTS/test-results.xml"
   pre:
     - mkdir ~/.cache/yarn
   node:
