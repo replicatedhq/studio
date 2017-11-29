@@ -37,11 +37,9 @@ export function listAvailableReleasesAfter(minSequence) {
   });
 }
 
-export function fillOutYaml(filename) {
-  const doc = yaml.safeLoad(fs.readFileSync(filename, "utf8"));
-
-  // Some fields are added by the real api and we need to simulate that here
-  if (doc.commponents) {
+export function fillOutDoc(doc: any) {
+// Some fields are added by the real api and we need to simulate that here
+  if (doc.components) {
     doc.components.forEach((component) => {
       component.containers.forEach((container) => {
         if (!container.logs) {
@@ -50,9 +48,24 @@ export function fillOutYaml(filename) {
             max_files: "",
           };
         }
+        if (container.env_vars) {
+          container.env_vars.forEach((envvar) => {
+            if (envvar.static_val && !envvar.value) {
+              envvar.value = envvar.static_val;
+            }
+            if (envvar.value && !envvar.static_val) {
+              envvar.static_val = envvar.value;
+            }
+          });
+        }
       });
     });
   }
+  return doc;
+}
 
+export function fillOutYaml(filename) {
+  const doc = yaml.safeLoad(fs.readFileSync(filename, "utf8"));
+  fillOutDoc(doc);
   return yaml.safeDump(doc);
 }
