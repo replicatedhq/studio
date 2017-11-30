@@ -26,7 +26,8 @@ Development on your Replicated YAML can be done locally, providing a quick way t
 1. Install and run the Studio Docker container
 
    ```bash
-   docker run --name studio --rm -d \
+   docker run --name studio -d \
+     --restart always \
      -v `pwd`/replicated:/replicated \
      -p 8006:8006 \
      replicated/studio:latest
