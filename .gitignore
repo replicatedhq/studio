@@ -4,3 +4,5 @@ dist
 yarn-error.log
 replicated/
 .idea/
+
+!src/

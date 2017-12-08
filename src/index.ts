@@ -13,6 +13,7 @@ import * as process from "process";
 
 import routes from "./routes";
 import consts from "./consts";
+import { listAvailableReleases } from "./replicated/release";
 
 // TODO yargs
 function validate() {
@@ -25,11 +26,35 @@ function validate() {
 }
 
 function watch() {
-  if (!fs.existsSync(consts.localPath)) {
-    console.log(chalk.red(`Please create your application yaml at ${consts.localPath} before continuing.`));
+  if (!fs.existsSync(path.join(consts.localPath, "current.yaml"))) {
+    console.log(chalk.red(`Please create your application yaml at ${path.join(consts.localPath, "current.yaml")} before continuing.`));
     process.exit(1);
   }
-  console.log(chalk.green(`Watching "${consts.localPath}" for changes. Any updates to this file will be sent as an application update.`));
+  console.log(chalk.green(`Watching "${path.join(consts.localPath, "current.yaml")}" for changes. Any updates to this file will be sent as an application update.`));
+  fs.watchFile(path.join(consts.localPath, "current.yaml"), (curr, prev) => {
+    const releases = listAvailableReleases();
+    if (releases.length === 0) {
+      fs.copyFileSync(path.join(consts.localPath, "current.yaml"), path.join(consts.localPath, "releases", "1.yaml"));
+      console.log("Created first release at releases/1.yaml");
+    } else {
+      // next release is at the number of last, plus 1
+      const last = releases[releases.length - 1];
+      let name = "";
+      if (last.indexOf(".yaml") !== -1) {
+        name = path.basename(last, ".yaml");
+      } else {
+        name = path.basename(last, ".yml");
+      }
+      let lastNum = Number(name);
+      if (isNaN(lastNum)) {
+        console.log(`Unable to parse ${name} as integer`);
+      } else {
+        let nextName = String(lastNum + 1);
+        fs.copyFileSync(path.join(consts.localPath, "current.yaml"), path.join(consts.localPath, "releases", nextName + ".yaml"));
+        console.log(`created next release at releases/${nextName}.yaml`);
+      }
+    }
+  });
 }
 
 function serve() {
@@ -142,6 +167,7 @@ function serve() {
 }
 
 exports.start = () => {
+  console.log("Started");
   validate();
   watch();
   serve();
