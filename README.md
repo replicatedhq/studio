@@ -1,6 +1,6 @@
 # Replicated Developer Studio
 
-[![Code Climate](https://codeclimate.com/github/replicatedhq/studio/badges/gpa.svg)](https://codeclimate.com/github/replicatedhq/studio)
+[![Maintainability](https://api.codeclimate.com/v1/badges/42d30525bcdc13534040/maintainability)](https://codeclimate.com/github/replicatedhq/studio)
 
 The [Replicated Developer Studio](https://help.replicated.com/docs/kb/developer-resources/using-replicated-studio-to-quickly-iterate-on-your-yaml/) provides you with an isolate development environment, allowing you and your team to streamline your application development and remove the need to to create releases for every change you may need create along the way.
 
