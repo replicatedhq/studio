@@ -17,18 +17,18 @@ import { listAvailableReleases } from "./replicated/release";
 
 // TODO yargs
 function validate() {
-  let validThresholds = ["info", "warn", "error", "off"];
-  let thesholdInvalid = _.indexOf(validThresholds, consts.lintThreshold) === -1;
+  const validThresholds = ["info", "warn", "error", "off"];
+  const thesholdInvalid = _.indexOf(validThresholds, consts.lintThreshold) === -1;
   if (thesholdInvalid) {
     console.log(chalk.red(`unknown lint threshold ${consts.lintThreshold}. Choices are ${validThresholds.join(", ")}`));
     process.exit(1);
   }
 }
 
-function watch() {
+export function watch() {
   if (!fs.existsSync(path.join(consts.localPath, "current.yaml"))) {
-    console.log(chalk.red(`Please create your application yaml at ${path.join(consts.localPath, "current.yaml")} before continuing.`));
-    process.exit(1);
+    console.log(chalk.red(`No file detected at ${path.join(consts.localPath, "current.yaml")}. An attempt will be made to create one for you when Replicated first requests it.`));
+    return;
   }
   console.log(chalk.green(`Watching "${path.join(consts.localPath, "current.yaml")}" for changes. Any updates to this file will be sent as an application update.`));
   fs.watchFile(path.join(consts.localPath, "current.yaml"), (curr, prev) => {
@@ -45,11 +45,11 @@ function watch() {
       } else {
         name = path.basename(last, ".yml");
       }
-      let lastNum = Number(name);
+      const lastNum = Number(name);
       if (isNaN(lastNum)) {
         console.log(`Unable to parse ${name} as integer`);
       } else {
-        let nextName = String(lastNum + 1);
+        const nextName = String(lastNum + 1);
         fs.copyFileSync(path.join(consts.localPath, "current.yaml"), path.join(consts.localPath, "releases", nextName + ".yaml"));
         console.log(`created next release at releases/${nextName}.yaml`);
       }
@@ -88,8 +88,8 @@ function serve() {
       handlerFunc(req)
         .then((result: any) => {
           if (result) {
-            let statusToSend = result.status || 200;
-            let contentType = result.contentType || "application/json";
+            const statusToSend = result.status || 200;
+            const contentType = result.contentType || "application/json";
 
             let bodyToLog = result.body;
             if (!bodyToLog) {
@@ -98,7 +98,7 @@ function serve() {
               bodyToLog = `${bodyToLog.substring(0, 512)} (... truncated, total ${bodyToLog.length} bytes)`;
             }
             console.log(chalk.cyan(`[${reqId}] => ${result.status} ${bodyToLog}`));
-            let respObj = res.status(statusToSend).type(contentType).set("X-ReplicatedLocal-RequestId", reqId);
+            const respObj = res.status(statusToSend).type(contentType).set("X-ReplicatedLocal-RequestId", reqId);
             if (result.filename) {
               respObj.attachment(result.filename);
             }

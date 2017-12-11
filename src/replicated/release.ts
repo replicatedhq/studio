@@ -10,7 +10,7 @@ function listAvailableReleasesInDir(filePath: string) {
     return [];
   }
   const files = fs.readdirSync(filePath);
-  const releases: String[] = [];
+  const releases: string[] = [];
   files.forEach((file) => {
     // Valid releases are <int>.y[a]ml
     if (_.endsWith(file, ".yaml") || _.endsWith(file, ".yml")) {

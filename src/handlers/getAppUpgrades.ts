@@ -6,6 +6,7 @@ import * as linter from "replicated-lint";
 
 import consts from "../consts";
 import {fillOutYaml, listAvailableReleasesAfter} from "../replicated/release";
+import {getRelease} from "../replicated/helpers";
 
 const ruleNotifiesAt = threshold => rule => !linter.ruleTypeLT(rule.type, threshold);
 
@@ -18,7 +19,7 @@ function releaseDetails(release, yamlContents: any, lastModifiedTime: string) {
   };
 }
 
-export default async function (req) {
+export default async function(req) {
   const currentVersion = req.body.CurrentVersion;
   const releases = listAvailableReleasesAfter(currentVersion);
 
@@ -28,7 +29,7 @@ export default async function (req) {
     return [];
   }
   _.forEach(releases, (release) => {
-    let releasePath = path.join(consts.localPath, release);
+    const releasePath = path.join(consts.localPath, "releases", release);
     const lastModifiedTime = fs.lstatSync(releasePath).mtime.toISOString();
     const yamlContents = fillOutYaml(releasePath);
 
