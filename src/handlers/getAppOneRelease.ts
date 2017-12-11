@@ -3,25 +3,51 @@ import * as path from "path";
 import * as chalk from "chalk";
 
 import consts from "../consts";
-import { allowMultiDocumentResponse } from "../replicated/helpers";
+import {allowMultiDocumentResponse, getRelease} from "../replicated/helpers";
 import { listAvailableReleases } from "../replicated/release";
 
-export default async function (req) {
+export default async function(req) {
   const releases = listAvailableReleases();
   if (releases.length === 0) {
-    throw { status: 500, err: new Error("No releases found") };
+    try {
+      const yaml = await getRelease(req, req.params.sequence);
+      const date = new Date();
+      return {
+        status: 200,
+        contentType: "text/yaml",
+        headers: {
+          "X-Replicated-ReleaseDate": date.toISOString(),
+        },
+        body: yaml,
+      };
+    } catch (err) {
+      throw { status: 500, err: new Error("No releases found") };
+    }
   }
 
   let releaseFilename;
-  if (fs.existsSync(path.join(consts.localPath, `${req.params.sequence}.yaml`))) {
-    releaseFilename = path.join(consts.localPath, `${req.params.sequence}.yaml`);
-  } else if (fs.existsSync(path.join(consts.localPath, `${req.params.sequence}.yml`))) {
-    releaseFilename = path.join(consts.localPath, `${req.params.sequence}.yml`);
+  if (fs.existsSync(path.join(consts.localPath, "releases", `${req.params.sequence}.yaml`))) {
+    releaseFilename = path.join(consts.localPath, "releases", `${req.params.sequence}.yaml`);
+  } else if (fs.existsSync(path.join(consts.localPath, "releases", `${req.params.sequence}.yml`))) {
+    releaseFilename = path.join(consts.localPath, "releases", `${req.params.sequence}.yml`);
   }
 
   if (!releaseFilename) {
-    chalk.red(`Replicated requested release sequence ${req.params.sequence}, but this realease yaml was not found in ${consts.localPath}`);
-    throw { status: 500, err: new Error("Release not found") };
+    try {
+      const yaml = await getRelease(req, req.params.sequence);
+      const date = new Date();
+      return {
+        status: 200,
+        contentType: "text/yaml",
+        headers: {
+          "X-Replicated-ReleaseDate": date.toISOString(),
+        },
+        body: yaml,
+      };
+    } catch (err) {
+      chalk.red(`Replicated requested release sequence ${req.params.sequence}, but this realease yaml was not found in ${path.join(consts.localPath, "releases")}`);
+      throw { status: 500, err: new Error("Release not found") };
+    }
   }
 
   const lastModifiedTime = fs.lstatSync(releaseFilename).mtime.toISOString();

@@ -1,12 +1,16 @@
 import * as fs from "fs";
 import * as _ from "lodash";
+import * as path from "path";
 import * as yaml from "js-yaml";
 
 import consts from "../consts";
 
-export function listAvailableReleases() {
-  const files = fs.readdirSync(consts.localPath);
-  const releases: String[] = [];
+function listAvailableReleasesInDir(filePath: string) {
+  if (!fs.existsSync(filePath)) {
+    return [];
+  }
+  const files = fs.readdirSync(filePath);
+  const releases: string[] = [];
   files.forEach((file) => {
     // Valid releases are <int>.y[a]ml
     if (_.endsWith(file, ".yaml") || _.endsWith(file, ".yml")) {
@@ -27,6 +31,28 @@ export function listAvailableReleases() {
   return _.sortBy(releases, (release) => {
     return _.parseInt(_.split(release, ".")[0]);
   });
+}
+
+export function listAvailableReleases() {
+  let files = listAvailableReleasesInDir(path.join(consts.localPath, "releases"));
+
+  if (files.length === 0) {
+    // create "releases" dir if it does not already exist
+    if (!fs.existsSync(path.join(consts.localPath, "releases"))) {
+        fs.mkdirSync(path.join(consts.localPath, "releases"));
+    }
+
+    // check parent dir for releases as part of migration process
+    files = listAvailableReleasesInDir(consts.localPath);
+    // and copy them to the releases dir if they exist
+    if (files.length !== 0) {
+      files.forEach((file) => {
+          fs.copyFileSync(file, path.join(consts.localPath, "releases", path.basename(file)));
+      });
+      files = listAvailableReleasesInDir(path.join(consts.localPath, "releases"));
+    }
+  }
+  return files;
 }
 
 export function listAvailableReleasesAfter(minSequence) {

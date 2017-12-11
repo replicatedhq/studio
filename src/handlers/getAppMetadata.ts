@@ -3,7 +3,7 @@
 // will throw an error when presented with a sequence that doesn't exist. this
 // response is simply a static response, returned to keep replicated happy.
 
-export default async function (req) {
+export default async function(req) {
   const metadata = {
     logo_data: "",
     version: "local",

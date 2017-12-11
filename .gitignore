@@ -3,3 +3,6 @@ dist
 .vscode
 yarn-error.log
 replicated/
+.idea/
+
+!src/
