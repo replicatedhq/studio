@@ -39,12 +39,7 @@ export function watch() {
     } else {
       // next release is at the number of last, plus 1
       const last = releases[releases.length - 1];
-      let name = "";
-      if (last.indexOf(".yaml") !== -1) {
-        name = path.basename(last, ".yaml");
-      } else {
-        name = path.basename(last, ".yml");
-      }
+      const name = last.replace(/\.[^/.]+$/, "");
       const lastNum = Number(name);
       if (isNaN(lastNum)) {
         console.log(`Unable to parse ${name} as integer`);
