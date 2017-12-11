@@ -2,3 +2,8 @@
   * Add [replicated-lint](https://github.com/replicatedhq/replicated-lint) to release loading, invalid yaml will not be exposed as a release.
   * Allow specifying the target YAML directory and upstream url via `STUDIO_YAML_DIR` and `STUDIO_UPSTREAM_BASE_URL`
   * Fix a bug where a YAML document with no `components` section would cause a 500 error
+
+0.5.0 /2017-12-11
+  * Now watches a file 'current.yaml' and creates a new latest release when a change is made
+  * Moved releases to within a 'releases' directory
+  * Fetch app yaml from the Replicated API if none is present when a request is made using a valid license
