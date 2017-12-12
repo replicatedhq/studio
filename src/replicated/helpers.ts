@@ -3,6 +3,7 @@ import * as https from "https";
 import consts from "../consts";
 import * as path from "path";
 import * as fs from "fs";
+import { URL } from "url";
 
 export async function allowMultiDocumentResponse(userAgent) {
   return false;
@@ -10,7 +11,6 @@ export async function allowMultiDocumentResponse(userAgent) {
 
 export function getRelease(req, sequence) {
   return new Promise((resolve, reject) => {
-    const { URL } = require("url");
     const upstreamURL = new URL(consts.upstreamEndpoint);
     const options = {
       host: upstreamURL.host,
