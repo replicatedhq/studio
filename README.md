@@ -2,7 +2,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/42d30525bcdc13534040/maintainability)](https://codeclimate.com/github/replicatedhq/studio)
 
-The [Replicated Developer Studio](https://help.replicated.com/docs/kb/developer-resources/using-replicated-studio-to-quickly-iterate-on-your-yaml/) provides you with an isolate development environment, allowing you and your team to streamline your application development and remove the need to to create releases for every change you may need create along the way.
+The [Replicated Developer Studio](https://help.replicated.com/docs/kb/developer-resources/using-replicated-studio-to-quickly-iterate-on-your-yaml/) provides you with an isolated development environment, allowing you and your team to streamline your application development and remove the need to to create releases for every change you may need create along the way.
 
 ## Getting started
 
@@ -29,7 +29,7 @@ The [Replicated Developer Studio](https://help.replicated.com/docs/kb/developer-
 
 Once Studio is installed Studio will create two files, `$HOME/replicated/current.yaml` and `$HOME/replicated/releases/[current-sequence-number].yaml`. (For example, if the latest release has a sequence number of 25 then `$HOME/replicated/releases/25.yaml` will be created.)
 
-***Please note: The `current.yml` file owner will be set to root. You may want to change this to the user you are logged in as***
+***Please note: The `current.yaml` file owner will be set to root. You may want to change this to the user you are logged in as***
 
 After the initial installation, Replicated will no longer use the remote API for any release sequence numbers, so it is ok to generate as many releases as you need locally.
 
