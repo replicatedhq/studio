@@ -7,3 +7,6 @@
   * Now watches a file 'current.yaml' and creates a new latest release when a change is made
   * Moved releases to within a 'releases' directory
   * Fetch app yaml from the Replicated API if none is present when a request is made using a valid license
+
+0.5.1 /2017-12-11
+  * Fix for fetching app yaml from the Replicated API
