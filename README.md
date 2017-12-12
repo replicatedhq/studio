@@ -29,7 +29,9 @@ The [Replicated Developer Studio](https://help.replicated.com/docs/kb/developer-
 
 Once Studio is installed Studio will create two files, `$HOME/replicated/current.yaml` and `$HOME/replicated/releases/[current-sequence-number].yaml`. (For example, if the latest release has a sequence number of 25 then `$HOME/replicated/releases/25.yaml` will be created.)
 
-After the initial installation, Replicated will no longer use the remote API for any sequence numbers, so it is ok to generate as many releases as you need locally.
+***Please note: The `current.yml` file owner will be set to root. You may want to change this to the user you are logged in as***
+
+After the initial installation, Replicated will no longer use the remote API for any release sequence numbers, so it is ok to generate as many releases as you need locally.
 
 A new release can be created by simply updating `$HOME/replicated/current.yaml`. Replicated Studio monitors this file for changes and generates a corresponding file in `$HOME/replicated/releases` using the next available sequence number.
 
