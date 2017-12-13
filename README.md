@@ -1,3 +1,5 @@
+![Replicated Studio Header Image](readme_header.jpg)
+
 # Replicated Developer Studio
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/42d30525bcdc13534040/maintainability)](https://codeclimate.com/github/replicatedhq/studio)
