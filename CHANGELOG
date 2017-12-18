@@ -10,3 +10,6 @@
 
 0.5.1 /2017-12-11
   * Fix for fetching app yaml from the Replicated API
+
+0.5.2 /2017-12-18
+  * Update replicated-lint version to include support for `shm_size` container param
