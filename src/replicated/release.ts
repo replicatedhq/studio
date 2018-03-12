@@ -91,7 +91,11 @@ export function fillOutDoc(doc: any) {
 }
 
 export function fillOutYaml(filename) {
-  const doc = yaml.safeLoad(fs.readFileSync(filename, "utf8"));
-  fillOutDoc(doc);
-  return yaml.safeDump(doc);
+  const docs = yaml.safeLoadAll(fs.readFileSync(filename, "utf8"));
+  const inflated = docs.map((doc) => {
+    const full = fillOutDoc(doc);
+    return yaml.safeDump(full);
+  });
+
+  return inflated.join("---\n");
 }
