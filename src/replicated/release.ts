@@ -90,12 +90,75 @@ export function fillOutDoc(doc: any) {
   return doc;
 }
 
-export function fillOutYaml(filename) {
-  const docs = yaml.safeLoadAll(fs.readFileSync(filename, "utf8"));
-  const inflated = docs.map((doc) => {
-    const full = fillOutDoc(doc);
-    return yaml.safeDump(full);
+export function fillOutYaml(filename: string): [string, string] {
+  const source = fs.readFileSync(filename, "utf8");
+
+  return fillOutYamlString(source);
+}
+
+// returns replicated yaml, full multi-doc yaml
+export function fillOutYamlString(source: string): [string, string] {
+  let ymls = source.split("---\n");
+  let replicated = "";
+
+  ymls = _.map(ymls, (yml) => {
+    if (!_.trim(yml)) {
+      return "";
+    }
+    const meta = metadata(yml);
+    const k = kind(meta);
+    const doc = yaml.safeLoad(yml);
+    const full = yaml.safeDump(fillOutDoc(doc));
+
+    if (!replicated && isKindReplicated(yml)) {
+      replicated = full;
+    }
+
+    return meta ? [meta, full].join("\n") : full;
   });
 
-  return inflated.join("---\n");
+  return [replicated, _.compact(ymls).join("---\n")];
+}
+
+export function metadata(yaml: string): string {
+  const lines = yaml.split("\n");
+  let i = 0;
+  let metadata: string[] = [];
+
+  // skip blanks
+  for (; i < lines.length; i++) {
+    const line = lines[i];
+    if (_.trim(line) === "") {
+      continue;
+    }
+    break;
+  }
+
+  // first contiguous comment is metadata
+  for (; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (/^\s*#.*$/.test(line)) {
+      metadata.push(line);
+      continue;
+    }
+    break;
+  }
+
+  return metadata.join("\n");
+}
+
+export function kind(metadata: string): string {
+  const matches = metadata.match(/kind:\s(\w*)/);
+
+  return matches ? matches[1] : "";
+}
+
+export function isKindReplicated(metadata: string): boolean {
+  const k = kind(metadata);
+  if (!k) {
+    return true;
+  }
+
+  return k === "replicated";
 }

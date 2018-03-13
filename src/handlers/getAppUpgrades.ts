@@ -31,19 +31,19 @@ export default async function(req) {
   _.forEach(releases, (release) => {
     const releasePath = path.join(consts.localPath, "releases", release);
     const lastModifiedTime = fs.lstatSync(releasePath).mtime.toISOString();
-    const yamlContents = fillOutYaml(releasePath);
+    const [replYaml, multiYaml] = fillOutYaml(releasePath);
 
     const shouldLint = consts.lintThreshold !== "off";
 
     if (!shouldLint) {
-      versions.push(releaseDetails(release, yamlContents, lastModifiedTime));
+      versions.push(releaseDetails(release, multiYaml, lastModifiedTime));
       return;
     }
 
     const ruleSet =  linter.rules.all.filter(ruleNotifiesAt(consts.lintThreshold));
 
     const linterErrors = linter.lint(
-      yamlContents,
+      replYaml,
       {
         rules: ruleSet,
         schema: linter.schemas.parsed,
@@ -54,7 +54,7 @@ export default async function(req) {
       console.log();
       console.log(chalk.yellow(`${linterErrors.length} errors in ${releasePath}:`));
       linter.cmdutil.reporters.consoleReporter(
-        yamlContents,
+        replYaml,
         ruleSet,
         linterErrors,
       );
@@ -64,7 +64,7 @@ export default async function(req) {
       }
     }
 
-    versions.push(releaseDetails(release, yamlContents, lastModifiedTime));
+    versions.push(releaseDetails(release, multiYaml, lastModifiedTime));
   });
 
   if (!_.isEmpty(failedPaths)) {
