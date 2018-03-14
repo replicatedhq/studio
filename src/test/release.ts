@@ -72,7 +72,8 @@ kind: Deployment
     const [replYml, multiYml] = fillOutYamlString(yml);
 
     expect(replYml).to.equal("replicated_api_version: 2.18.0\n");
-    expect(multiYml).to.equal(`# kind: replicated
+    expect(multiYml).to.equal(`---
+# kind: replicated
 replicated_api_version: 2.18.0
 ---
 # kind: scheduler-kubernetes
