@@ -1,6 +1,6 @@
 import {describe, it} from "mocha";
 import {expect} from "chai";
-import {fillOutDoc} from "../replicated/release";
+import {fillOutDoc, fillOutYamlString, kind, metadata} from "../replicated/release";
 
 describe("fillOutDoc", () => {
   it("handles an empty components spec", () => {
@@ -55,5 +55,56 @@ describe("fillOutDoc", () => {
 
     expect(updated).to.have.deep.property("components.0.containers.0.logs.max_size", "");
     expect(updated).to.have.deep.property("components.0.containers.0.logs.max_files", "");
+  });
+});
+
+describe("fillOutYamlString", () => {
+  it("finds the replicated yaml and preserves metadata", () => {
+    const yml = `---
+# kind: replicated
+replicated_api_version: 2.18.0
+
+---
+# kind: scheduler-kubernetes
+apiVersion: apps/v1
+kind: Deployment
+`;
+    const [replYml, multiYml] = fillOutYamlString(yml);
+
+    expect(replYml).to.equal("replicated_api_version: 2.18.0\n");
+    expect(multiYml).to.equal(`# kind: replicated
+replicated_api_version: 2.18.0
+---
+# kind: scheduler-kubernetes
+apiVersion: apps/v1
+kind: Deployment
+`);
+  });
+});
+
+describe("metadata", () => {
+  it("finds metadata", () => {
+    const yaml = `
+
+# id: abc
+# kind: replicated
+
+replicated_api_version: 2.18.0`;
+    const answer = `# id: abc
+# kind: replicated`;
+    const output = metadata(yaml);
+
+    expect(output).to.equal(answer);
+  });
+});
+
+describe("kind", () => {
+  it("finds the kind", () => {
+    const meta = `# id: abc
+# kind: replicated`;
+    const answer = "replicated";
+    const output = kind(meta);
+
+    expect(output).to.equal(answer);
   });
 });
