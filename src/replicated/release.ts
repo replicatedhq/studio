@@ -117,6 +117,8 @@ export function fillOutYamlString(source: string): [string, string] {
       const doc = yaml.safeLoad(yml);
       const full = yaml.safeDump(fillOutDoc(doc));
 
+      replicated = full;
+
       // restore metadata stripped by load and dump
       return meta ? [meta, full].join("\n") : full;
     }
