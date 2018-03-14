@@ -96,7 +96,13 @@ export function fillOutYaml(filename: string): [string, string] {
   return fillOutYamlString(source);
 }
 
-// returns replicated yaml, full multi-doc yaml
+/*
+ * Find the Replicated yaml doc and fill it out. Do not parse and output yaml
+ * for other schedulers because the {{ }} template delimiters will be
+ * transformed into [Object object] unless quoted, and the daemon will fail to
+ * decode templated non-string types if quoted. Returns full Replicated yaml doc
+ * for linting and full multi-doc for serving.
+ */
 export function fillOutYamlString(source: string): [string, string] {
   let ymls = source.split("---\n");
   let replicated = "";
@@ -106,18 +112,19 @@ export function fillOutYamlString(source: string): [string, string] {
       return "";
     }
     const meta = metadata(yml);
-    const k = kind(meta);
-    const doc = yaml.safeLoad(yml);
-    const full = yaml.safeDump(fillOutDoc(doc));
 
-    if (!replicated && isKindReplicated(yml)) {
-      replicated = full;
+    if (isKindReplicated(meta)) {
+      const doc = yaml.safeLoad(yml);
+      const full = yaml.safeDump(fillOutDoc(doc));
+
+      // restore metadata stripped by load and dump
+      return meta ? [meta, full].join("\n") : full;
     }
 
-    return meta ? [meta, full].join("\n") : full;
+    return yml;
   });
 
-  return [replicated, _.compact(ymls).join("---\n")];
+  return [replicated, ymls.join("---\n")];
 }
 
 export function metadata(yaml: string): string {
