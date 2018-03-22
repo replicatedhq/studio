@@ -4,28 +4,15 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/42d30525bcdc13534040/maintainability)](https://codeclimate.com/github/replicatedhq/studio)
 
-The [Replicated Developer Studio](https://help.replicated.com/docs/kb/developer-resources/using-replicated-studio-to-quickly-iterate-on-your-yaml/) provides you with an isolated development environment, allowing you and your team to streamline your application development and remove the need to to create releases for every change you may need create along the way.
+The Replicated Developer Studio provides you with an isolated development environment, allowing you and your team to streamline your application development and remove the need to to create releases for every change you may need create along the way.
 
 ## Getting started
 
-1. Install Replicated and Replicated Studio:
+To get started with Studio, consult the "Development Environment" docs for the scheduler you're using:
 
-   ```bash
-   curl -sSL https://get.replicated.com/studio | sudo bash
-   ```
-
-   The install script also creates `$HOME/replicated` which is used for creating new releases.
-   
-1. Tail the logs from Replicated Studio. 
-
-   This will show any issues with your `replicated.yml` changes, and all interactions Replicated has with the Studio API.
-   
-   ```bash
-   docker logs -f studio
-   ```
-
-1. Navigate to the on-premise admin console at `https://<YOUR SERVER ADDRESS>:8800` in the browser and upload your development license.
-
+- [Replicated Scheduler](https://help.replicated.com/docs/native/getting-started/developer-environment/)
+- [Replicated + Docker Swarm](https://help.replicated.com/docs/swarm/getting-started/development-environment/)
+- [Replicated + Kubernetes](https://help.replicated.com/docs/kubernetes/getting-started/development-environment/)
 
 ## Iterating on your YAML
 
