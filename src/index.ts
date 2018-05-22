@@ -13,7 +13,7 @@ import * as process from "process";
 
 import routes from "./routes";
 import consts from "./consts";
-import { listAvailableReleases } from "./replicated/release";
+import { fillOutYaml, listAvailableReleases } from "./replicated/release";
 
 // TODO yargs
 function validate() {
@@ -26,15 +26,25 @@ function validate() {
 }
 
 export function watch() {
-  if (!fs.existsSync(path.join(consts.localPath, "current.yaml"))) {
-    console.log(chalk.red(`No file detected at ${path.join(consts.localPath, "current.yaml")}. An attempt will be made to create one for you when Replicated first requests it.`));
+  const filePath = path.join(consts.localPath, "current.yaml");
+  if (!fs.existsSync(filePath)) {
+    console.log(chalk.red(`No file detected at ${filePath}. An attempt will be made to create one for you when Replicated first requests it.`));
     return;
   }
-  console.log(chalk.green(`Watching "${path.join(consts.localPath, "current.yaml")}" for changes. Any updates to this file will be sent as an application update.`));
-  fs.watchFile(path.join(consts.localPath, "current.yaml"), (curr, prev) => {
+  console.log(chalk.green(`Watching "${filePath}" for changes. Any updates to this file will be sent as an application update.`));
+  fs.watchFile(filePath, (curr, prev) => {
+    try {
+      // make sure this is valid yaml before creating a release
+      fillOutYaml(filePath);
+    } catch (err) {
+      console.log(chalk.red(`Failure parsing YAML file ${filePath}:`));
+      console.log(chalk.red(err));
+      return;
+    }
+
     const releases = listAvailableReleases();
     if (releases.length === 0) {
-      fs.copyFileSync(path.join(consts.localPath, "current.yaml"), path.join(consts.localPath, "releases", "1.yaml"));
+      fs.copyFileSync(filePath, path.join(consts.localPath, "releases", "1.yaml"));
       console.log("Created first release at releases/1.yaml");
     } else {
       // next release is at the number of last, plus 1
@@ -45,7 +55,7 @@ export function watch() {
         console.log(`Unable to parse ${name} as integer`);
       } else {
         const nextName = String(lastNum + 1);
-        fs.copyFileSync(path.join(consts.localPath, "current.yaml"), path.join(consts.localPath, "releases", nextName + ".yaml"));
+        fs.copyFileSync(filePath, path.join(consts.localPath, "releases", nextName + ".yaml"));
         console.log(`created next release at releases/${nextName}.yaml`);
       }
     }
