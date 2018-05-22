@@ -82,7 +82,7 @@ export default async function(req) {
     status: 200,
     body: JSON.stringify({
       Versions: versions,
-      UpdatePolicy: "manual",
+      UpdatePolicy: consts.updatePolicy,
     }),
   };
 }
