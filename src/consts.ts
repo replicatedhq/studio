@@ -4,4 +4,5 @@ export default {
   upstreamEndpoint: process.env.STUDIO_UPSTREAM_BASE_URL || "https://api.replicated.com/market/",
   lintThreshold: process.env.STUDIO_LINT_THRESHOLD || "error",
   lintRequired: /^(?:y|yes|true|1)$/i.test(process.env.STUDIO_LINT_REQUIRED || ""),
+  updatePolicy: process.env.STUDIO_UPDATE_POLICY || "automatic",
 };
