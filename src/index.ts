@@ -166,7 +166,7 @@ function serve() {
     res.status(404).send(errMsg);
   });
 
-  app.listen(8066, "0.0.0.0", () => {
+  app.listen(8006, "0.0.0.0", () => {
     console.log("Replicated Studio listening on port 8006...");
   });
 }
