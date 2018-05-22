@@ -13,3 +13,11 @@
 
 0.5.2 /2017-12-18
   * Update replicated-lint version to include support for `shm_size` container param
+
+0.6.0 /2018-03-26
+  * Added support for multi-doc YAML.
+  * Upgraded replicated-lint to 0.10.5.
+
+0.7.0 /2018-05-22
+  * Studio will now have a default update policy of `automatic`. Update policy (automatic|manual) can now be set via `STUDIO_UPDATE_POLICY`.
+  * Fix a bug where invalid YAML would prevent new releases from being applied in the On-Prem browser console.
