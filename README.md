@@ -16,7 +16,7 @@ To get started with Studio, consult the "Development Environment" docs for the s
 
 ## Iterating on your YAML
 
-Once Studio is installed Studio will create two files, `$HOME/replicated/current.yaml` and `$HOME/replicated/releases/[current-sequence-number].yaml`. (For example, if the latest release has a sequence number of 25 then `$HOME/replicated/releases/25.yaml` will be created.)
+Once Studio and Replicated have been installed and a license has been uploaded, two files will be created, `$HOME/replicated/current.yaml` and `$HOME/replicated/releases/[current-sequence-number].yaml`. (For example, if the latest release has a sequence number of 25 then `$HOME/replicated/releases/25.yaml` will be created.)
 
 ***Please note: The `current.yaml` file owner will be set to root. You may want to change this to the user you are logged in as***
 
