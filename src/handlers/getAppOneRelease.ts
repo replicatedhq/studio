@@ -45,7 +45,7 @@ export default async function(req) {
         body: yaml,
       };
     } catch (err) {
-      console.log(chalk.red(`Replicated requested release sequence ${req.params.sequence}, but this realease yaml was not found in ${path.join(consts.localPath, "releases")}`));
+      console.log(chalk.red(`Replicated requested release sequence ${req.params.sequence}, but this release yaml was not found in ${path.join(consts.localPath, "releases")}`));
       throw { status: 500, err: new Error("Release not found") };
     }
   }
