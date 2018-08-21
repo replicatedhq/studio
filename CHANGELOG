@@ -24,3 +24,6 @@
 
 0.7.1 /2018-06-26
   * Upgraded replicated-lint to 0.10.13.
+
+0.7.2 /2018-08-20
+  * Upgraded replicated-lint to 0.13.7.
