@@ -2028,9 +2028,9 @@ registry-url@^3.0.3:
   dependencies:
     rc "^1.0.1"
 
-replicated-lint@^0.13.21:
-  version "0.13.21"
-  resolved "https://registry.yarnpkg.com/replicated-lint/-/replicated-lint-0.13.21.tgz#76300b79d1f58b79d470511fb2d6d1a883e82fb3"
+replicated-lint@^0.13.22:
+  version "0.13.22"
+  resolved "https://registry.yarnpkg.com/replicated-lint/-/replicated-lint-0.13.22.tgz#8f88e4c60091c78ea3a94e26d1e30bae0ab8f0e2"
   dependencies:
     "@types/json-schema" "^6.0.1"
     "@types/tv4" "^1.2.28"
