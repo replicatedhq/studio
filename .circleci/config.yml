@@ -44,6 +44,7 @@ jobs:
             exit 1
           fi
       - checkout
+      - setup_remote_docker
       - attach_workspace:
           at: .
       - deploy:
