@@ -1,0 +1,75 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+version: 2
+
+jobs:
+
+  test:
+    working_directory: ~/repo
+    environment:
+        MOCHA_FILE: test-results/mocha/test-results.xml
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: build
+          command: yarn
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+      - save_cache:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: test + coverage
+          command: yarn test
+      - store_test_results:
+          path: test-results
+
+  deploy:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8
+    steps:
+      - run: |
+          if [ "${CIRCLE_PROJECT_USERNAME}" != "replicatedhq" ]; then
+            echo nope nope nope
+            exit 1
+          fi
+      - checkout
+      - attach_workspace:
+          at: .
+      - deploy:
+          name: publish npm
+          command: |
+            npm run login-cli
+            npm run publish-if-version-changed
+      - deploy:
+          name: publish docker
+          command: |
+            docker build --rm=false -t replicated/studio:$(node -pe "require('./package.json').version;") .
+            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag replicated/studio:$(node -pe "require('./package.json').version;") replicated/studio:latest
+            docker push replicated/studio:$(node -pe "require('./package.json').version;")
+            docker push replicated/studio:latest
+
+workflows:
+  version: 2
+
+  build_accept_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
