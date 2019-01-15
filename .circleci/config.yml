@@ -56,7 +56,7 @@ jobs:
           name: publish docker
           command: |
             docker build --rm=false -t replicated/studio:$(node -pe "require('./package.json').version;") .
-            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker tag replicated/studio:$(node -pe "require('./package.json').version;") replicated/studio:latest
             docker push replicated/studio:$(node -pe "require('./package.json').version;")
             docker push replicated/studio:latest
