@@ -2739,10 +2739,10 @@ registry-url@^3.0.3:
   dependencies:
     rc "^1.0.1"
 
-replicated-lint@^0.14.20:
-  version "0.14.20"
-  resolved "https://registry.yarnpkg.com/replicated-lint/-/replicated-lint-0.14.20.tgz#b3a87acc5d01a023af639156b7d3c121c45b04a7"
-  integrity sha512-y7S7DAVoeY1iGTyc3xxBRknBXXZFmodMuQD9pA8z5k0jsSlddg6l5UnP2Bo2csQ8Of0CE9JGzRqeDH9zf2qOlg==
+replicated-lint@^0.15.1:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/replicated-lint/-/replicated-lint-0.15.1.tgz#7e8bd668bab03b74198daac0c64e381b4f4cbd46"
+  integrity sha512-XElP2AdaMskAfB2TVTD4eGqCphaPoED5BCwS6lFQMSie6MEsecfZAwa8dg/sLAffpG1goQp5zkUj5JlXg1wysQ==
   dependencies:
     "@types/json-schema" "^6.0.1"
     "@types/tv4" "^1.2.28"
