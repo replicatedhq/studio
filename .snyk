@@ -1,0 +1,28 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - replicated-lint > snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > snyk > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > snyk > @snyk/dep-graph > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > snyk > snyk-config > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > junit-report-builder > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > snyk > snyk-php-plugin > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > snyk > inquirer > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
+    - replicated-lint > snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-07-04T00:16:47.301Z'
