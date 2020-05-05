@@ -42,3 +42,6 @@
 
 0.7.8 /2020-04-22
   * Upgraded replicated-lint to 0.18.3
+
+0.7.9 /2020-05-05
+  * Upgraded replicated-lint to 0.18.5
