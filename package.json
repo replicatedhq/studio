@@ -1,7 +1,7 @@
 {
   "name": "replicated-studio",
   "author": "Replicated, Inc.",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "license": "Apache-2.0",
   "repository": "https://github.com/replicatedhq/replicated-studio.git",
   "description": "A tool to enable easier iteration on Replicated projects",
@@ -38,7 +38,7 @@
     "js-yaml": "^3.8.2",
     "lodash": "^4.17.4",
     "npm-cli-login": "^0.0.10",
-    "replicated-lint": "^0.18.5",
+    "replicated-lint": "^0.18.7",
     "source-map-support": "^0.4.11",
     "uuid": "^3.0.1"
   }
