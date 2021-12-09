@@ -12,11 +12,12 @@
     "bin/"
   ],
   "scripts": {
-    "prepublish": "rm -rf ./dist && yarn run tslint && tsc -p .",
+    "prepublish": "npm run snyk-protect; rm -rf ./dist && yarn run tslint && tsc -p .",
     "tslint": "tslint --project ./tsconfig.json",
     "test": "yarn run prepublish && mocha ./dist/test/*.js",
     "login-cli": "npm-cli-login",
-    "publish-if-version-changed": "publish"
+    "publish-if-version-changed": "publish",
+    "snyk-protect": "snyk protect"
   },
   "bin": "bin/replicated-studio",
   "devDependencies": {
@@ -40,6 +41,8 @@
     "npm-cli-login": "^0.0.10",
     "replicated-lint": "^0.18.9",
     "source-map-support": "^0.4.11",
-    "uuid": "^3.0.1"
-  }
+    "uuid": "^3.0.1",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
